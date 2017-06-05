@@ -1,3 +1,5 @@
+//BINARY SEARCH (modified)
+
 #include <stdio.h>
 
 #define ARRAYSIZE 10
