@@ -9,6 +9,7 @@ int getline(char [], int);
 int strrindex(char[],char[]);
 int getPattern(char []);
 int checkPatternLength(char [], char[]);
+int comparator(int *, int *, int *, char [], char []);
 
 void main()
 {
@@ -61,15 +62,25 @@ int checkPatternLength(char pattern[], char line[])
 
 int strrindex(char line[], char pattern[])
 {
-	int i,j,k;
+	int line_index, temporary_line_index, pattern_index;
 	
-	for( i = strlen(line) - 2; i > -1; i--)
+	for( line_index = strlen(line) - 2;line_index > -1; line_index--)
 	{
-		for( j = i , k = strlen(pattern) - 1 ; line[j] == pattern[k] && k != 0; k-- , j-- )
-			;
-		if( k == 0 )
-			return j;	
+		pattern_index = comparator(&line_index, &temporary_line_index, &pattern_index, line, pattern);
+		
+		if( pattern_index == 0 )
+			return temporary_line_index;	
 	}
 
 	return -1;
+}
+
+int comparator(int *line_index, int *temporary_line_index, int *pattern_index, char line[], char pattern[])
+{
+	for( (*temporary_line_index) = (*line_index) , (*pattern_index) = strlen(pattern) - 1 ; 
+		line[(*temporary_line_index)] == pattern[(*pattern_index)] && (*pattern_index) != 0; 
+		(*pattern_index)-- , (*temporary_line_index)-- )
+		;
+
+	return (*pattern_index);
 }
