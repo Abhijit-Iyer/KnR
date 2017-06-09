@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define LINESIZE 10000
 
@@ -34,7 +35,7 @@ int getline(char line[], int limit)
 	char ch;
 	int index=0;
 
-	while((ch=getchar()) != EOF && ch!='\n' && limit != 0)
+	while((ch=getchar()) != EOF && ch!='\n' && limit-- != 0)
 		line[index++] = ch;
 	if(ch == '\n')
 	{
@@ -47,7 +48,7 @@ int getline(char line[], int limit)
 int getPattern(char pattern[])
 {
 	printf("\n Enter the pattern for matching: ");
-	gets(pattern);
+	fgets(pattern,LINESIZE,stdin);
 }
 
 int checkPatternLength(char pattern[], char line[])
@@ -77,7 +78,7 @@ int strrindex(char line[], char pattern[])
 
 int comparator(int *line_index, int *temporary_line_index, int *pattern_index, char line[], char pattern[])
 {
-	for( (*temporary_line_index) = (*line_index) , (*pattern_index) = strlen(pattern) - 1 ; 
+	for( (*temporary_line_index) = (*line_index) , (*pattern_index) = strlen(pattern) - 2 ; 
 		line[(*temporary_line_index)] == pattern[(*pattern_index)] && (*pattern_index) != 0; 
 		(*pattern_index)-- , (*temporary_line_index)-- )
 		;
