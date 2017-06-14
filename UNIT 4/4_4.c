@@ -14,6 +14,7 @@ double pop();
 int getop(char []);
 char getch();
 void ungetch(int);
+void stack_handler();
 void top_of_stack();
 void duplicate();
 void swap_stack();
@@ -27,7 +28,7 @@ int main()
 
 	printf("\n Enter the Postfix Expression : ");
 
-	while((type = getop(operand_operator)) != EOF)
+	while( (type = getop(operand_operator)) != EOF)
 	{
 		switch(type)
 		{
@@ -52,25 +53,24 @@ int main()
 							break;
 
 			case '\n'	:	printf("\n Result = %lf \n",pop());
-							break;
+							printf("\n Would you like to call the stack handler?(y/n) : " );
+							if( getchar() == 'y' )
+							{
+								getchar();				// To read '\n' that was entered after 'y'.
+								stack_handler();
+								break;
+							}
+							else
+							{
+								getchar();				// To read '\n' that was entered after 'n'.
+								break;
+							}
 
 			case '%'	:	op2 = pop();
 							if( op2 == 0 )
 								printf("\n Modulo Zero error. ");
 							else
 								fmod( pop() , op2);
-							break;
-
-			case '_'	:	top_of_stack();
-							break;		
-
-			case '!'	: 	duplicate();
-							break;		
-
-			case '@'	:	swap_stack();
-							break;	
-
-			case '#'	:	clear_stack();
 							break;
 
 			default		: 	printf("\n Unknown symbol ' %s 'in the input. o_0",operand_operator);
@@ -80,6 +80,33 @@ int main()
 
 	return 0;
 
+}
+
+void stack_handler()
+{
+	char ch;
+
+	printf("\n Press: \n");
+	printf(" 1 - for top_of_stack();\n 2 - for duplicate();\n 3 - for swap_stack();\n 4 - for clear_stack(); :");
+	ch = getchar();
+	getchar();				// To bypass the '\n' read after the choice entered. 
+	switch(ch)
+	{
+			case '1'	:	top_of_stack();
+							break;		
+
+			case '2'	: 	duplicate();
+							break;		
+
+			case '3'	:	swap_stack();
+							break;	
+
+			case '4'	:	clear_stack();
+							break;
+
+			default		: 	printf("\n No such choice available. ");
+							break;
+	}
 }
 
 #define STACK_SIZE 100
