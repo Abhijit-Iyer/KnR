@@ -1,13 +1,15 @@
 //Reverse Polish Calculator with provision for mathematical functions under math.h
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
+#include <string.h>
 
 #define MAXOP 100
 #define NUMBER '0'
+#define STRING '1'
 
+void expression_handler();
 void push(double);
 double pop();
 int getop(char []);
@@ -18,22 +20,26 @@ void top_of_stack();
 void duplicate();
 void swap_stack();
 void clear_stack();
-void scientific_notations();
+void scientific_notations(char []);
 
 int main()
+{
+	
+	printf("\n Enter the postfix expression : ");
+
+	expression_handler();
+
+	return 0;
+
+}
+
+void input_handler()
 {
 	int type;
 	double op2;
 	char operand_operator[MAXOP];
 
-	printf("\n Would you like to use scientific notations?(y/n) ");
-	type = getchar(); getchar(); // To bypass '\n entered after the choice.'
-	if(type == 'y')	
-		scientific_notations();
-
-	printf("\n Enter the Postfix Expression : ");
-
-	while( (type = getop(operand_operator)) != EOF)
+	while( (type = getop(operand_operator)) != EOF )
 	{
 		switch(type)
 		{
@@ -59,17 +65,16 @@ int main()
 
 			case '\n'	:	printf("\n Result = %lf \n",pop());
 							printf("\n Would you like to call the stack handler?(y/n) : " );
-							if( getchar() == 'y' )
+							if( getch() == 'y' )
 							{
-								getchar();				// To read '\n' that was entered after 'y'.
+								getchar();
 								stack_handler();
-								break;
 							}
 							else
-							{
 								getchar();				// To read '\n' that was entered after 'n'.
-								break;
-							}
+
+							printf("\n\n Enter EOF character to exit (or) enter another postfix expression to continue : ");
+							break;
 
 			case '%'	:	op2 = pop();
 							if( op2 == 0 )
@@ -78,33 +83,36 @@ int main()
 								fmod( pop() , op2);
 							break;
 
+			case STRING	:	scientific_notations(operand_operator);
+							break;
+
 			default		: 	printf("\n Unknown symbol ' %s 'in the input. o_0",operand_operator);
 							break;
 		}
 	}
-
-	return 0;
-
 }
 
-void scientific_notations()
+void scientific_notations(char s[])
 {
-	char ch;
-	char value;
+	double temp;
 
-	printf("\n Enter : \n 1. for sin(); \n");
-	ch = getchar(); getchar();	//For bypassing '\n'
-
-	printf("\n Enter the value for which you'd like to calculate : ");
-	value = getchar();
-	switch(ch)
+	if(strcmp(s,"sin") == 0)
 	{
-		case '1' : 	push(sin(value));
-					break;
-
-		default	 :	printf("\n Wrong Choice. ");
-					break;	
+		//printf("\n string = %s");
+		push(sin(pop()));
 	}
+
+	if(strcmp(s,"exp") == 0)
+		push(exp(pop()));
+
+	if(strcmp(s,"pow") == 0)
+	{
+		temp = pop();
+
+		push(pow(pop(), temp));
+	}
+
+	// More mathematical function can be added in this routine
 }
 
 void stack_handler()
@@ -112,9 +120,9 @@ void stack_handler()
 	char ch;
 
 	printf("\n Press: \n");
-	printf(" _ for top_of_stack();\n ! for duplicate();\n @ for swap_stack();\n # for clear_stack(); :");
+	printf(" 1 - for top_of_stack();\n 2 - for duplicate();\n 3 - for swap_stack();\n 4 - for clear_stack(); \n\n Choice : ");
 	ch = getchar();
-	getchar();				// To bypass the '\n' read after the choice entered. 
+	getchar();				// To bypass the '\n' entered after the choice entered. 
 	switch(ch)
 	{
 			case '1'	:	top_of_stack();
@@ -204,6 +212,16 @@ int getop(char s[])
 	if( s[i] == '-' && isdigit( s[++i] = getch()) )
 	{
 		flag = 1;						//shows that the number is negative
+	}
+
+	if(isalpha(s[i]))
+		while(isalpha(s[++i] = c = getch()))
+			;
+
+	if(isalpha(s[i-1]))
+	{
+		s[i] = '\0';
+		return STRING;
 	}
 
 	if(!isdigit(c) && c != '.' && flag == 0)
