@@ -16,13 +16,15 @@ void main()
 	int n;
 	printf("\n Enter an integer: ");
 	scanf("%d",&n);
+	itoa(n);
 	printf("\n The character converted is: %s",s);
-	itoa(n,s);
 }
+
+int i = 0;
 
 int itoa(int n)
 {
-	int sign,i = 0;
+	int sign;
 
 	if((sign = n) < 0 )
 	{
@@ -32,10 +34,10 @@ int itoa(int n)
 	}
 
 	if(sign < 0)
-		putchar('-');
+		s[i++] = '-';
 
 	if( n/10 )
 		itoa(n/10);
 
-	putchar( ( n % 10 ) + '0');
+	s[i++] = ( n % 10 ) + '0';
 }
