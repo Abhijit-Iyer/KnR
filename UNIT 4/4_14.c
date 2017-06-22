@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 #define swap(data_type, parameter_1, parameter_2) { data_type temp; \
-													temp = parameter_1; \
-													parameter_1 = parameter_2; \
-													parameter_2 = temp; } 
+						temp = parameter_1; \
+						parameter_1 = parameter_2; \
+						parameter_2 = temp; } 
 
 void main()
 {
