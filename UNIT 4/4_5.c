@@ -112,7 +112,7 @@ void scientific_notations(char s[])
 		push(pow(pop(), temp));
 	}
 
-	// More mathematical function can be added in this routine
+	// More mathematical functions can be added in this routine
 }
 
 void stack_handler()
