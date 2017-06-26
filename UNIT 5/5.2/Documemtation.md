@@ -36,7 +36,7 @@ We had to manipulate that and the manipulation is done.
 ### getfloat(float *address)
 
 	Parameters passed : 
-			int *address (the address where the integers is to be stored)
+			float *address (the address where the floating point number is to be stored)
 
 	Returns :
 			Upon successful completion, the last character read.
