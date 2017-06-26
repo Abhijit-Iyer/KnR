@@ -45,4 +45,8 @@ We had to manipulate that and the manipulation is done.
 
 	Role :
 
-		Read a floating point number from the console, along with it's sign, and stores it int the address passed.
+		Read a floating point number from the console, along with it's sign, 
+		and stores it in the address passed.
+
+----
+
