@@ -3,50 +3,77 @@
 ----							
 ## OBJECTIVE
 
->To create a function getfloat(float *), that would read a floating point number(a series of characters) from the console and store them in a specific memory address. 
-In the framework given in the book(The C Programming Language), any non integer character present after a sign is treated as zero. 
-We had to manipulate that and the manipulation is done.
+>Creating a function getfloat(float *), that would read a floating point number(a series of 
+number characters) from the console and store them in a specific memory address. 
 
 ----
-## METHODS PRESENT
+## FILES PRESENT
 
-* main();
-
->>Takes the no. of elements to be read in all from the console, calls the method getfloat();as many times and finally, displays the elements read.
-			
-* getint(float *);
-			
->>The function getfloat(float *) reads a character/series of characters from the console, converts them into a floating point number(if valid) and stores them in the memory address passed by the caller.
+* main.c
+* input_output.c
+* get_float.c
+* Utilities.c
+* headers.h
 
 ----
-## METHOD DESCRIPTIONS
-### main()         
+## main.c
 
-	Parameters passed :
-		None
+### void main()
 
-	Returns :
-		0 upon successful completion 
+    Parameters Received : 
+        None
 
-	Role :
-		Takes the no. of elements to be read in all from the console, calls the method getfloat();
-		as many times and finally, displays the elements read.
+    Return Value :
+        0 upon successful completion
 
-----
-### getfloat(float *address)
+    Return Type :
+        void
 
-	Parameters passed : 
-			float *address (the address where the floating point number is to be stored)
-
-	Returns :
-			Upon successful completion, the last character read.
-		Else
-			Returns 0 with an error message.
-
-	Role :
-
-		Read a floating point number from the console, along with it's sign, 
-		and stores it in the address passed.
+    Role :
+        Makes function calls to four main functions, and generates the flow of the entire program.
 
 ----
 
+## input_output.c
+
+### get_maxsize()
+
+    Parameters Received : 
+        int *maxsize
+
+    Return Value :
+        0 upon successful completion
+    
+    Return Type :
+        integer 
+
+    Role :
+        Displays a message that prompts the user to enter the max-size of the array, and takes the value of max-size from the user and stores it in the address of variable maxsize.
+
+### prompt-user-to-enter-array-elements()
+
+    Parameters Received : 
+        None
+
+    Return Value :
+        0 upon successful completion
+
+    Return Type :
+        integer
+
+    Role :
+        Displays a message that prompts the user to enter the elements to be entered into the array as float.
+
+### display-array()
+
+    Parameters Received : 
+       None
+
+    Return Value :
+        0 upon successful completion
+
+    Return Type:
+        integer
+
+    Role :
+        Displays the elements present in the array.
