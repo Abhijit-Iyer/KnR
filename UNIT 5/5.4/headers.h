@@ -8,7 +8,6 @@
 void get_strings_from_user(char *, char *);
 int str_end(char *, char *);
 int getline(char *);
-void* replace_newline_character_with_space(char *);
 void display_result();
 void match_characters(char **, char **);
 

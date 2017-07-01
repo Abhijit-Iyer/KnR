@@ -15,15 +15,6 @@ int getline(char line[])
 	return i;
 }
 
-void* replace_newline_character_with_space(char *string_a)
-{
-	if(*(string_a = string_a-2) == '\n')
-	{
-		*string_a++ = ' ';
-	}
-	return string_a;
-}
-
 void match_characters(char **string_a, char **string_b)
 {
 	char *string_b_base = *string_b;
